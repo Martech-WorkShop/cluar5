@@ -1,0 +1,69 @@
+# =========================================================
+# STAGE: DEVELOPMENT & FORENSICS WORKSHOP
+# Base: Debian 13 (FULL Version)
+# Goal: Mirror Production environment (User/Paths) but with Full Tooling.
+# =========================================================
+FROM debian:13
+
+# ---------------------------------------------------------
+# 1. INSTALL ALL TOOLS
+# Same base tools as before, ensuring full docs and locales.
+# ---------------------------------------------------------
+RUN apt-get update && apt-get install -y \
+    gcc g++ make cmake pkg-config musl-tools \
+    gambit libgambit-dev luajit libluajit-5.1-dev \
+    gdb valgrind strace ltrace pstack \
+    bash vim nano man-db \
+    curl wget netcat-openbsd dnsutils iproute2 procps psmisc lsof tcpdump \
+    ssl-cert ca-certificates locales git file less sudo \
+    && apt-get clean \
+    && truncate -s 0 /var/log/*.log
+
+# ---------------------------------------------------------
+# 2. CONFIGURE LOCALES
+# ---------------------------------------------------------
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# ---------------------------------------------------------
+# 3. CREATE USER (MATCHES PROD EXACTLY)
+# Prod uses 'appuser' with UID 1000 and GID 1000.
+# We must replicate this exactly to ensure file permissions match 
+# when mounting volumes or copying artifacts.
+# ---------------------------------------------------------
+RUN groupadd -g 1000 appuser && \
+    useradd -u 1000 -g 1000 -m -d /home/appuser -s /bin/bash appuser && \
+    echo "appuser:password" | chpasswd 2>/dev/null || true && \
+    echo "appuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# ---------------------------------------------------------
+# 4. CONFIGURE GIT
+# ---------------------------------------------------------
+RUN git config --global user.name "DevUser" && \
+    git config --global user.email "dev@local.host"
+
+# ---------------------------------------------------------
+# 5. ENVIRONMENT CONFIGURATION
+# Enable core dumps.
+# ---------------------------------------------------------
+ENV ULIMIT_CORE="unlimited"
+RUN echo "ulimit -c unlimited" >> /etc/profile
+
+# ---------------------------------------------------------
+# 6. WORKSPACE SETUP (MATCHES PROD)
+# Prod WORKDIR is /home/appuser. We match it here.
+# This ensures relative paths in configs/scripts behave identically.
+# ---------------------------------------------------------
+WORKDIR /home/appuser
+
+# ---------------------------------------------------------
+# 7. ENTRYPOINT
+# Drops into shell as appuser? 
+# NOTE: We stay as ROOT in the Dockerfile definition to allow 
+# installing extra packages on the fly if needed, but the 
+# default working dir is the user's home.
+# You can switch to user at runtime with 'docker run --user appuser'.
+# ---------------------------------------------------------
+CMD ["/bin/bash"]

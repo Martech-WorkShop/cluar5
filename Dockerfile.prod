@@ -1,0 +1,61 @@
+# =========================================================
+# STAGE 1: BUILDER
+# =========================================================
+FROM debian:13-slim AS builder
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc make gambit luajit libgambit-dev libluajit-5.1-dev ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /build
+COPY . .
+
+# Compile with security hardening
+RUN make prod || \
+    (gsc -link -o logic_bundle.c src/core_logic.scm && \
+     gcc -O2 -fstack-protector-strong -D_FORTIFY_SOURCE=2 -o my-app \
+        src/main.c logic_bundle.c \
+        -lluajit -lgambit \
+        -Wl,-z,relro,-z,now \
+        -I/usr/include/luajit-2.1 -I/usr/include/gambit)
+
+# Strip all symbols to reduce size and hide logic
+RUN strip --strip-all my-app
+
+# =========================================================
+# STAGE 2: PRODUCTION (THE LOCKED BOX)
+# =========================================================
+FROM scratch
+
+# CRITICAL: We use 'scratch' (empty image).
+# We ONLY copy the binary and CA certs.
+# NO shell, NO ls, NO cat, NO bash, NO curl. NOTHING.
+
+# Copy CA Certs (essential for HTTPS/TLS)
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+
+# Copy the Binary
+COPY --from=builder /build/my-app /app/my-app
+
+# Create a non-root user manually (since no useradd command exists in scratch)
+# We use the UID/GID of a standard user (1000)
+# Note: In 'scratch', we can't create a user entry in /etc/passwd easily without copying it.
+# Alternative: Run as UID 1000 directly via docker run --user. 
+# But to be self-contained, we copy a minimal passwd entry from builder.
+RUN echo "appuser:x:1000:1000::/home/appuser:/sbin/nologin" > /etc/passwd
+
+# Setup directories
+RUN mkdir -p /home/appuser /var/log/app /tmp
+# Ownership is handled by the USER directive below or docker run --user
+
+# Switch to non-root user
+USER 1000:1000
+
+WORKDIR /home/appuser
+
+ENTRYPOINT ["/app/my-app"]
+
+# Healthcheck: Must be internal to the app since no curl exists
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD ["/app/my-app", "--health"]
+    

@@ -1,0 +1,53 @@
+# =========================================================
+# DEV: DAILY DEVELOPMENT WORKSHOP
+# Base: Debian 13 (Full)
+# Goal: Fast iteration, hot-reload, editing, git.
+# =========================================================
+FROM debian:13
+
+# ---------------------------------------------------------
+# 1. INSTALL DEV TOOLS
+# Focus on compilers, interpreters, editors, git.
+# Lighter on heavy forensics tools (reserved for Stage).
+# ---------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Build
+    gcc g++ make cmake pkg-config \
+    # Runtimes (for hot-reload/interpreted dev)
+    gambit libgambit-dev luajit libluajit-5.1-dev \
+    # Editors/Shell
+    bash vim nano git less \
+    # Basics
+    ca-certificates locales curl wget \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# ---------------------------------------------------------
+# 2. CONFIGURE LOCALES
+# ---------------------------------------------------------
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+# ---------------------------------------------------------
+# 3. CREATE USER (MATCHES PROD: appuser, UID 1000)
+# ---------------------------------------------------------
+RUN groupadd -g 1000 appuser && \
+    useradd -u 1000 -g 1000 -m -d /home/appuser -s /bin/bash appuser && \
+    echo "appuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# ---------------------------------------------------------
+# 4. GIT CONFIG
+# ---------------------------------------------------------
+RUN git config --global user.name "DevUser" && \
+    git config --global user.email "dev@local.host"
+
+# ---------------------------------------------------------
+# 5. WORKSPACE
+# ---------------------------------------------------------
+WORKDIR /home/appuser
+
+# ---------------------------------------------------------
+# 6. ENTRYPOINT
+# ---------------------------------------------------------
+CMD ["/bin/bash"]
