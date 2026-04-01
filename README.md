@@ -24,6 +24,8 @@ SotA LLMs write great code. Give them a surface where they can both feel safe an
 Cluar5 provides this surface with three carefuly selected layers, each with a distinct relationship between the LLM, the code, and the human architect:
 The languages are not chosen because they are popular, smart, unique or special, they are chosen because they are minimal, especially minimal from the perspective of an LLM.
 
+## The stack
+
 **The Lua layer**
 is where fast prototypes can be created effortlesly. Its simplicity is its strongest benefit, engineers can read a Lua file and understand what it does immediately.
 LLMs can write Lua code easely because it lacks the complexity of most fully fledged languages. Yet is is tourin complete and fully capable of full size complex apps.
@@ -60,31 +62,15 @@ The development arc is natural: prototype in Lua, move complexity to Scheme, bin
 
 ---
 
-## The stack
-
-| Layer | Language | Who reads it | LLM's role | Human's role |
-|---|---|---|---|---|
-| Scripts | LuaJIT | Engineers, domain experts | Writes, iterates, prototypes | Reads, adjusts, directs |
-| Logic | Gambit Scheme (R5) | Optional — brave engineers | Roams freely, expresses deeply | Architects, trusts |
-| Core | C | Engineers when needed | Binds, performs, solves | Reviews critical paths |
-
-### Why these three specifically
-
-**LuaJIT** — not Lua 5.4, not Python, not JavaScript. LuaJIT's FFI allows Lua to call C functions directly, making the Lua↔C boundary essentially free. Its syntax is minimal enough that an LLM produces it cleanly and a human reads it without friction. It is complete on its own — many projects never need to leave this layer.
-
-**Gambit Scheme** — not Racket, not Clojure, not Common Lisp. Gambit compiles directly to C, which means the Scheme layer and the C layer are not two things talking to each other — they become one binary. The R5RS standard (the smallest Scheme standard) is the constraint that makes the LLM's freedom safe: fewer constructs means fewer ways to go wrong.
-
-**C** — not Rust, not C++, not Zig. C is the language in which everything else is ultimately written. When you hit a problem in any other language, C can solve it. It has no opinion about how you use it, which means the LLM can use it exactly as the architecture requires.
-
+## PERFORMANCE!!!
 
 While not the main objective, at Cluar5, we're suckers for minimalism and performance, that's why we are so happy that these tools are both the best fit for LLMs and also the most performant, each in their category.
 
-Lua is the most performant interpreted language with Luajit taking it close to C performance in specific aplications. R5 Scheme is about the purest lisp there is, making it the most expressive and capable language an LLM can gracefully use. And C is the king of so many things it could take pages... so let's say it's the king of raw performance, the absolute master of raw I/O speed and the owner of the vastest low level collection of both old and cutting edge libraries.
-
+Lua is the most performant interpreted language with Luajit taking it close to C performance in specific aplications. R5 Scheme is about the purest lisp there is, highly functional, incredibly expressive and capable language, an LLM can gracefully express anything with it. And C is the king of so many things it could take pages... so let's just state the obvious: it's the king of raw performance, the absolute master of raw I/O speed and the owner of the vastest collection of both old and cutting edge low level libraries.
 
 ---
 
-## The four containers
+## Four containers + builder 
 
 | Container | Purpose | Binary | Shell | User |
 |---|---|---|---|---|
@@ -97,7 +83,8 @@ Production runs in a `scratch` container: no OS, no shell, no compilers, no atta
 
 ---
 
-## Directory structure
+## It's a template!
+Directory structure:
 
 ```
 /
@@ -146,6 +133,12 @@ To update: `workshop/scripts/update-versions.sh`
 - [workshop/docs/DEV-WORKFLOW.md](workshop/docs/DEV-WORKFLOW.md) — Development, staging, and forensics procedures
 - [workshop/docs/CONTRIBUTING.md](workshop/docs/CONTRIBUTING.md) — How to contribute to the template itself
 - [workshop/health/README.md](workshop/health/README.md) — Health check contract
+
+---
+
+## CAVEATS:
+
+You tell me, I can't find any...
 
 ---
 
