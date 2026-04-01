@@ -6,7 +6,7 @@ cluar5 is a starting point for LLM-native projects. Fork it, initialize it with 
 
 ## Step 1 — Fork the template on GitHub
 
-1. Go to [github.com/Martech-WorkShop/cluar5](https://github.com/Martech-WorkShop/cluar5)
+1. Go to [github.com/AI-Vectoring/cluar5](https://github.com/AI-Vectoring/cluar5)
 2. Click **"Use this template"** → **"Create a new repository"**
 3. Name it, set visibility, click **"Create repository"**
 

@@ -9,9 +9,9 @@
 
 set -e
 
-TEMPLATE_USER="Martech-WorkShop"
+TEMPLATE_USER="AI-Vectoring"
 TEMPLATE_NAME="cluar5"
-TEMPLATE_REPO="https://github.com/Martech-WorkShop/cluar5.git"
+TEMPLATE_REPO="https://github.com/AI-Vectoring/cluar5.git"
 
 # ── Check if already initialized ────────────────────────────────────────────
 if ! grep -q "GITHUB_USER=${TEMPLATE_USER}" PROJECT.conf 2>/dev/null; then

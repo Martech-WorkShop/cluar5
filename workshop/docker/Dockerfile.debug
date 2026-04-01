@@ -22,7 +22,7 @@ ARG BASE_IMAGE=cluar5-builder-base
 # --- STAGE 1: BUILDER ---
 FROM ${BASE_IMAGE} AS builder
 
-ARG REPO_URL=https://github.com/Martech-WorkShop/cluar5.git
+ARG REPO_URL=https://github.com/AI-Vectoring/cluar5.git
 ARG REPO_BRANCH=main
 
 RUN git clone --depth=1 --branch ${REPO_BRANCH} ${REPO_URL} /build/app

@@ -34,7 +34,7 @@ cluar5 is a project template. Contributions should improve the template itself â
    make debug
    ```
 4. Verify the rename script works on a clean clone
-5. Open a pull request against `Martech-WorkShop/cluar5`
+5. Open a pull request against `AI-Vectoring/cluar5`
 
 ---
 
@@ -49,7 +49,7 @@ cluar5 is a project template. Contributions should improve the template itself â
 
 ## Reporting issues
 
-Open an issue on [github.com/Martech-WorkShop/cluar5](https://github.com/Martech-WorkShop/cluar5/issues) with:
+Open an issue on [github.com/AI-Vectoring/cluar5](https://github.com/AI-Vectoring/cluar5/issues) with:
 - Which container is affected (dev / stage / prod / debug / builder-base)
 - Debian 13 version or Docker version if relevant
 - Steps to reproduce

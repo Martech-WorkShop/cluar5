@@ -16,7 +16,7 @@ That's it. No compilers. No language runtimes. No local toolchain. Everything ru
 
 ## Step 1 — Create your project from the template
 
-1. Go to **[github.com/Martech-WorkShop/cluar5](https://github.com/Martech-WorkShop/cluar5)**
+1. Go to **[github.com/AI-Vectoring/cluar5](https://github.com/AI-Vectoring/cluar5)**
 2. Click **"Use this template"** → **"Create a new repository"**
 3. Give it a name, choose public or private, click **"Create repository"**
 

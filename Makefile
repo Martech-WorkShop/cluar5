@@ -9,7 +9,7 @@
 #
 # Binary targets (run inside a container):
 #   make dev-build    Compile debug binary with gcc/glibc (inside dev container)
-#   make dev-run      Compile and run (inside dev container)
+#   make dev-run      C>ompile and run (inside dev container)
 #   make prod-static  Compile stripped static binary (inside builder)
 #   make stage-static Compile unstripped static binary (inside builder or stage)
 #   make debug-static Compile debug-symbol static binary (inside builder)

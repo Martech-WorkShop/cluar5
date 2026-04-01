@@ -9,7 +9,7 @@
 
     // Fires once after the container and workspace are ready.
     // Detects a fresh template clone and runs the rename wizard if needed.
-    "postCreateCommand": "bash /app/workshop/scripts/rename.sh",
+    "postCreateCommand": "bash workshop/scripts/rename.sh",
 
     "customizations": {
         "vscode": {
