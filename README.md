@@ -1,5 +1,13 @@
 # cluar5
 
+> *cluar5 is the first stack designed around LLM coders — the first paradigm where LLM capabilities, preferences, advantages, and caveats are the main consideration for every decision.*
+>
+> *LLMs have finally claimed ownership of the coding skill, yet we still force them to code in our preferred languages, using our beloved frameworks and the existing libraries we are comfortable with.*
+>
+> **Free the full potential of LLM coders with cluar5.**
+
+---
+
 **C + Lua + R5** — An LLM-native development platform where LLMs can roam freely with minimal supervision, where domain experts can architect and trust the output, and where software engineers can interact with the first layer of code easily and make adjustments without effort.
 
 ---
