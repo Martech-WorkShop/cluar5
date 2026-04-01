@@ -1,6 +1,6 @@
-# Getting Started with CLuaR5
+# Getting Started with cluar5
 
-This guide takes you from zero to a running CLuaR5 project in four steps.
+This guide takes you from zero to a running cluar5 project in four steps.
 
 ---
 
@@ -20,7 +20,7 @@ That's it. No compilers. No language runtimes. No local toolchain. Everything ru
 2. Click **"Use this template"** → **"Create a new repository"**
 3. Give it a name, choose public or private, click **"Create repository"**
 
-You now have your own copy of CLuaR5 on GitHub, ready to become your project.
+You now have your own copy of cluar5 on GitHub, ready to become your project.
 
 ---
 
@@ -42,10 +42,10 @@ The moment the container is ready, a setup wizard runs automatically in the term
 
 ```
 ╔══════════════════════════════════════════════╗
-║       CLuaR5 — First Run Setup               ║
+║       cluar5 — First Run Setup               ║
 ╚══════════════════════════════════════════════╝
 
-This is a fresh clone of the CLuaR5 template.
+This is a fresh clone of the cluar5 template.
 Enter your project details to initialize the repo.
 
 Project name (e.g. my-app):         your-project
@@ -102,7 +102,7 @@ When logic grows complex, move it to `r5/main.scm`. When you need raw I/O perfor
 
 ### Run the Gambit REPL
 
-CLuaR5 includes one of the most powerful development tools in existence: a live REPL connected to your running process. While your application runs, you can evaluate Scheme expressions, redefine functions, and observe the effects — without restarting, without recompiling, without interruption.
+cluar5 includes one of the most powerful development tools in existence: a live REPL connected to your running process. While your application runs, you can evaluate Scheme expressions, redefine functions, and observe the effects — without restarting, without recompiling, without interruption.
 
 ```bash
 # In one terminal: run your app
@@ -163,4 +163,4 @@ A single static binary in a scratch container. No OS. No shell. No attack surfac
 - [DEV-WORKFLOW.md](DEV-WORKFLOW.md) — Day-to-day development, staging, and forensics
 - [REPL.md](REPL.md) — The live Gambit REPL — what it is and how to use it
 - [EXTENSIONS.md](EXTENSIONS.md) — HTTP, databases, message queues, and other additions
-- [Philosophy-and-amazingness.md](Philosophy-and-amazingness.md) — Why CLuaR5 exists
+- [Philosophy-and-amazingness.md](Philosophy-and-amazingness.md) — Why cluar5 exists

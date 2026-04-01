@@ -1,4 +1,4 @@
-# Cluar5: Free the full potential of LLM coders. 
+# cluar5: Free the full potential of LLM coders. 
 
 The first paradigm where LLM capabilities, preferences, advantages, and caveats are the main consideration for every decision.
 
@@ -10,18 +10,18 @@ Our job as software engineers has switched from producers of code to designers o
 
 # A stack designed around LLM coders.
 
-Cluar5 is designed to minimize the surface for mistakes, hallucinations and avoids most of the language traps of popular languages by focusing in the languages LLMs work best with.
+cluar5 is designed to minimize the surface for mistakes, hallucinations and avoids most of the language traps of popular languages by focusing in the languages LLMs work best with.
 
 **C + Lua + R5** — An LLM-first environment where LLMs can roam freely with minimal supervision, where domain experts can architect and trust the output (for the most part :-), and where software engineers can interact with the first layer of code easily and make adjustments without effort.
 
-**Cluar5 is not just a poliglot asembly, it's 3 different views of the world, running in parallel, sharing everything in RAM.**
+**cluar5 is not just a poliglot asembly, it's 3 different views of the world, running in parallel, sharing everything in RAM.**
 
 
 ## The philosophy:
 
 SotA LLMs write great code. Give them a surface where they can both feel safe and express themselves more freely and whatch them reward you with their best output.
 
-Cluar5 provides this surface with three carefuly selected layers, each with a distinct relationship between the LLM, the code, and the human architect:
+cluar5 provides this surface with three carefuly selected layers, each with a distinct relationship between the LLM, the code, and the human architect:
 The languages are not chosen because they are popular, smart, unique or special, they are chosen because they are minimal, especially minimal from the perspective of an LLM.
 
 ## The stack:
@@ -44,14 +44,14 @@ This isn't a development tool. This is the runtime itself becoming the interface
 The LLM is not writing code and submitting it for review. The LLM is inside the process. It modifies a function — the modification is live, instantly, the program never stopped. It observes the effect. It modifies again. It is having a conversation with a running system, in real time, in the language of that system.
 
 This is what Lisp was designed for. NASA used it on the Deep Space 1 probe, they patched a bug in a spacecraft that was 100 million miles away, on a live running system, via exactly this mechanism. The program never stopped. The fix went in while the mission was in progress...
-Cluar5 brings this to LLM-native development (experimental).
+cluar5 brings this to LLM-native development (experimental).
 
 
 The LLM is not writing code and submitting it for review. The LLM is inside the process. It modifies a function — the modification is live, instantly, the program never stopped. It observes the effect. It modifies again. It is having a conversation with a running system, in real time, in the language of that system.
 
 This is what Lisp was designed for. NASA used it on the Deep Space 1 probe — they patched a bug in a spacecraft that was 100 million miles away, on a live running system, via exactly this mechanism. The program never stopped. The fix went in while the mission was in progress.
 
-CLuaR5 brings this to LLM-native development (Experimental).
+cluar5 brings this to LLM-native development (Experimental).
 
 
 **The C layer**
@@ -64,7 +64,7 @@ The development arc is natural: prototype in Lua, move complexity to Scheme, bin
 
 ## PERFORMANCE!!!
 
-While not the main objective, at Cluar5, we're suckers for minimalism and performance, that's why we are so happy that these tools are both the best fit for LLMs and also the most performant, each in their category.
+While not the main objective, at cluar5, we're suckers for minimalism and performance, that's why we are so happy that these tools are both the best fit for LLMs and also the most performant, each in their category.
 
 Lua is the most performant interpreted language with Luajit taking it close to C performance in specific aplications. R5 Scheme is about the purest lisp there is, highly functional, incredibly expressive and capable language, an LLM can gracefully express anything with it. And C is the king of so many things it could take pages... so let's just state the obvious: it's the king of raw performance, the absolute master of raw I/O speed and the owner of the vastest collection of both old and cutting edge low level libraries.
 
