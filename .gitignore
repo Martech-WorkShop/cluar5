@@ -16,6 +16,9 @@ Thumbs.db
 # Docker
 *.tar
 
+# Git worktrees
+.worktrees/
+
 # Secrets — never commit these
 .env
 *.pem
