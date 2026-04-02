@@ -38,6 +38,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # Editors (lightweight, for quick edits inside the container)
     vim \
     nano \
+    # SQLite — embedded database (in-process, no server)
+    libsqlite3-dev \
+    sqlite3 \
+    # PostgreSQL client — connect to external Postgres (sidecar or remote)
+    libpq-dev \
+    postgresql-client \
+    # Lua 5.4 — standard Lua (modern language: native integers, <close> vars, etc.)
+    # LuaJIT is already above — these are TWO DIFFERENT RUNTIMES, not interchangeable:
+    #   lua / lua5.4  → Lua 5.4 (this), Lua 5.1-incompatible features available
+    #   luajit        → LuaJIT 2.1, Lua 5.1 compatible only
+    lua5.4 \
+    liblua5.4-dev \
+    # OpenSSL headers — required for H2O source build (next section)
+    libssl-dev \
+    zlib1g-dev \
+    libyaml-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -g 1000 appuser && \
