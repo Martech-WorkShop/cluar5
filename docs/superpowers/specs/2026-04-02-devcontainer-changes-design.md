@@ -82,10 +82,10 @@ These are **not interchangeable** — they implement different language versions
 
 **Build approach for `Dockerfile.dev`:**
 - Build dependencies from Debian: `cmake`, `libssl-dev`, `zlib1g-dev`, `libyaml-dev`
-- Clone H2O from `https://github.com/h2o/h2o.git` at a pinned version (exact tag/commit to be determined during implementation — pick latest stable tag or recent master commit without HTTP/3 deps)
+- Clone H2O from `https://github.com/h2o/h2o.git` at a pinned commit hash. H2O stopped tagging releases in 2019; the project's official policy is that master is always production-ready. Pin to `77288edcfbed39faa2db47160d2c98915bdbd0c1` (master, 2026-04-02)
 - Standard CMake build: `cmake -DCMAKE_INSTALL_PREFIX=/usr/local .` then `make && make install`
 - Build runs as root during image build, H2O runs as `appuser` at runtime
-- H2O version pinned in `VERSIONS` file under a new `# --- Dev Tools ---` tier
+- H2O commit hash pinned in `VERSIONS` file under a new `# --- Dev Tools ---` tier. No tags exist upstream — commit hash is the correct pinning mechanism
 
 ---
 
