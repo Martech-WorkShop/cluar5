@@ -26,6 +26,7 @@ The languages are not chosen because they are popular, smart, unique or special,
 
 ## The stack:
 
+
 **The Lua layer**
 is where fast prototypes can be created effortlesly. Its simplicity is its strongest benefit, engineers can read a Lua file and understand what it does immediately.
 LLMs can write Lua code easely because it lacks the complexity of most fully fledged languages. Yet is is tourin complete and fully capable of full size complex apps.
