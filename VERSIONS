@@ -8,8 +8,8 @@
 #         Run: workshop/scripts/update-versions.sh to update to latest upstream.
 
 # --- Tier 1: Core Runtime ---
-# LuaJIT (OpenResty fork — more active than upstream, includes important patches)
-LUAJIT_VERSION=v2.1-20240314
+# LuaJIT (upstream — branch v2.1, the active development line)
+LUAJIT_VERSION=v2.1
 
 # Gambit Scheme compiler and runtime
 GAMBIT_VERSION=v4.9.5
@@ -25,3 +25,9 @@ GDB_VERSION=15.2
 VALGRIND_VERSION=3.23.0
 STRACE_VERSION=6.12
 TCPDUMP_VERSION=4.99.4
+
+# --- Dev Tools ---
+# H2O HTTP server — built from source (no Debian 13 package; upstream is actively maintained).
+# No release tags since 2019; project policy is that master is always production-ready.
+# To update: pick a recent master commit from https://github.com/h2o/h2o/commits/master
+H2O_COMMIT=77288edcfbed39faa2db47160d2c98915bdbd0c1
