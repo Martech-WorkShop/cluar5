@@ -28,10 +28,10 @@ You now have your own copy of cluar5 on GitHub, ready to become your project.
 
 ## Step 2 — Open it in VS Code
 
-1. Open **VS Code**
-2. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
-3. Type and select: **Dev Containers: Clone Repository in Container Volume**
-4. Paste your new repository URL and press Enter
+1. On your new GitHub repository page, click the green **"Code"** button and copy the HTTPS URL
+2. Open **VS Code** and press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
+3. Type and select: **Dev Containers: Clone Repository in Container Volume** — VS Code will ask you for the URL
+4. Paste the URL you just copied and press Enter
 5. VS Code builds the dev container and opens your workspace inside it
 
 First build takes a few minutes — Docker is pulling Debian and installing the development toolchain. Every subsequent open is instant.
