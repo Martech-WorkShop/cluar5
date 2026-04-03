@@ -16,9 +16,24 @@
 #
 # Utility:
 #   make clean        Remove build/ output
+#
+# Private repository support:
+#   Set GITHUB_TOKEN in your environment to clone from a private repo.
+#   GITHUB_TOKEN=ghp_xxxx make stage
+#   See workshop/docs/MAKING-YOUR-REPO-PRIVATE.md for setup instructions.
 
 include PROJECT.conf
 include VERSIONS
+
+# Required for --mount=type=secret support in Dockerfiles.
+export DOCKER_BUILDKIT := 1
+
+# GNU Make does not allow literal commas inside function calls.
+comma := ,
+
+# Pass --secret only when GITHUB_TOKEN is set. Public repos: leave unset.
+GITHUB_TOKEN  ?=
+_SECRET_FLAG   = $(if $(GITHUB_TOKEN),--secret id=github_token$(comma)env=GITHUB_TOKEN,)
 
 MUSL_PREFIX   ?= /opt/musl
 LUA_IMPL      ?= luajit  # alternatives: lua54 (see workshop/docs/TEMPLATE-USAGE.md)
@@ -55,6 +70,7 @@ dev:
 
 stage: build-base
 	docker build \
+		$(_SECRET_FLAG) \
 		--build-arg BASE_IMAGE=$(PROJECT_NAME)-builder-base \
 		--build-arg REPO_URL=$(REPO_URL) \
 		--build-arg REPO_BRANCH=$(REPO_BRANCH) \
@@ -64,6 +80,7 @@ stage: build-base
 
 prod: build-base
 	docker build \
+		$(_SECRET_FLAG) \
 		--build-arg BASE_IMAGE=$(PROJECT_NAME)-builder-base \
 		--build-arg REPO_URL=$(REPO_URL) \
 		--build-arg REPO_BRANCH=$(REPO_BRANCH) \
@@ -73,6 +90,7 @@ prod: build-base
 
 debug: build-base
 	docker build \
+		$(_SECRET_FLAG) \
 		--build-arg BASE_IMAGE=$(PROJECT_NAME)-builder-base \
 		--build-arg REPO_URL=$(REPO_URL) \
 		--build-arg REPO_BRANCH=$(REPO_BRANCH) \

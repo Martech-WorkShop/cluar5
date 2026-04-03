@@ -6,6 +6,9 @@
     },
     "workspaceFolder": "/app",
     "remoteUser": "appuser",
+    "remoteEnv": {
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+    },
 
     // Fires once after the container and workspace are ready.
     // Detects a fresh template clone and runs the rename wizard if needed.

@@ -18,7 +18,9 @@ That's it. No compilers. No language runtimes. No local toolchain. Everything ru
 
 1. Go to **[github.com/AI-Vectoring/cluar5](https://github.com/AI-Vectoring/cluar5)**
 2. Click **"Use this template"** → **"Create a new repository"**
-3. Give it a name, choose public or private, click **"Create repository"**
+3. Give it a name, keep visibility set to **Public**, click **"Create repository"**
+   *(For private repos see [MAKING-YOUR-REPO-PRIVATE.md](MAKING-YOUR-REPO-PRIVATE.md))*
+   *(Already have a GitHub token set up? You can select Private directly)*
 
 You now have your own copy of cluar5 on GitHub, ready to become your project.
 
