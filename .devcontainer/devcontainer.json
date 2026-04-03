@@ -10,9 +10,13 @@
         "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
     },
 
-    // Fires once after the container and workspace are ready.
-    // Detects a fresh template clone and runs the rename wizard if needed.
-    "postCreateCommand": "bash workshop/scripts/rename.sh",
+    // Runs once on first container creation — detects a fresh template clone
+    // and runs the rename wizard if needed.
+    "onCreateCommand": "bash workshop/scripts/rename.sh",
+
+    // Keep the container running when the VS Code window closes — preserves
+    // live Gambit REPL state so you can reconnect without losing your session.
+    "shutdownAction": "none",
 
     "customizations": {
         "vscode": {
@@ -38,12 +42,12 @@
         }
     },
 
-    // Forward ports your application exposes during development.
-    // Uncomment and adjust to match your application.
-    // "forwardPorts": [8080],
-
-    // Mount the build output directory so binaries persist across rebuilds.
-    "mounts": [
-        "source=cluar5-build,target=/app/build,type=volume"
-    ]
+    // Gambit REPL port — connect with: rlwrap nc localhost 7000
+    "forwardPorts": [7000],
+    "portsAttributes": {
+        "7000": {
+            "label": "Gambit REPL",
+            "onAutoForward": "silent"
+        }
+    }
 }
