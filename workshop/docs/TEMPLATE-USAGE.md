@@ -14,9 +14,9 @@ cluar5 is a starting point for LLM-native projects. Fork it, initialize it with 
 
 ## Step 2 — Open in VS Code Dev Containers
 
-1. Open VS Code
-2. `Ctrl+Shift+P` → **Dev Containers: Clone Repository in Container Volume**
-3. Paste your new repository URL
+1. On your new GitHub repository page, click the green **"Code"** button and copy the HTTPS URL
+2. Open VS Code and press `Ctrl+Shift+P` → **Dev Containers: Clone Repository in Container Volume** — VS Code will ask you for the URL
+3. Paste the URL you just copied and press Enter
 4. Wait for the container to build (first time takes a few minutes)
 
 On first launch the container runs `workshop/scripts/rename.sh` automatically. It will prompt:
