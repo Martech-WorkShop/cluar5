@@ -15,6 +15,10 @@
     // and runs the rename wizard if needed.
     "onCreateCommand": "bash workshop/scripts/templateInit.sh",
 
+    // Runs after VS Code attaches — host credentials are available, so
+    // commit and push the initialization changes.
+    "postAttachCommand": "bash workshop/scripts/templateCommit.sh",
+
     // Keep the container running when the VS Code window closes — preserves
     // live Gambit REPL state so you can reconnect without losing your session.
     "shutdownAction": "none",

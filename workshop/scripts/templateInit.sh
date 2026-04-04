@@ -124,23 +124,8 @@ if [ "${LOCAL_VOLUME_ENABLED}" = "true" ]; then
         .devcontainer/devcontainer.json
 fi
 
-# ── Commit and push ───────────────────────────────────────────────────────────
-echo "Committing initialization..."
-git config user.name "${GITHUB_USER}"
-git config user.email "${GITHUB_USER}@users.noreply.github.com"
-git add -A
-git commit -m "chore: initialize project as ${PROJECT_NAME}"
-
-if git push; then
-    PUSH_STATUS="pushed to GitHub"
-else
-    PUSH_STATUS="PUSH FAILED — run 'git push' manually before continuing"
-fi
-
 echo ""
-echo "Done. Your project is ready:"
+echo "Done. Rename complete."
 echo "  Name:       ${PROJECT_NAME}"
 echo "  Repository: ${REPO_URL}"
-echo "  Git:        ${PUSH_STATUS}"
-echo "  Next step:  make build-base && make dev"
 echo ""
