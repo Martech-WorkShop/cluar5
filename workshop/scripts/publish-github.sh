@@ -11,6 +11,7 @@
 
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
+source PROJECT.conf
 
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
@@ -46,13 +47,13 @@ ok "Remote 'origin' is configured: $(git remote get-url origin)"
 
 echo ""
 echo -e "${BOLD}${BLUE}── Building images ─────────────────────────────────${NC}"
-info "Building cluar5-builder-base..."
+info "Building ${PROJECT_NAME}-builder-base..."
 make build-base || abort "Builder-base build failed."
-ok "cluar5-builder-base built"
+ok "${PROJECT_NAME}-builder-base built"
 
-info "Building cluar5-dev..."
+info "Building ${PROJECT_NAME}-dev..."
 make dev || abort "Dev image build failed."
-ok "cluar5-dev built"
+ok "${PROJECT_NAME}-dev built"
 
 echo ""
 echo -e "${BOLD}${BLUE}── Running test suites ─────────────────────────────${NC}"

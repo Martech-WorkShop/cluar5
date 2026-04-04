@@ -67,13 +67,13 @@ fi
 # ── Build ─────────────────────────────────────────────────────────────────────
 echo ""
 echo -e "${BOLD}${BLUE}── Building images ─────────────────────────────────${NC}"
-info "Building cluar5-builder-base..."
+info "Building ${PROJECT_NAME}-builder-base..."
 make build-base || abort "Builder-base build failed."
-ok "cluar5-builder-base built"
+ok "${PROJECT_NAME}-builder-base built"
 
-info "Building cluar5-dev..."
+info "Building ${PROJECT_NAME}-dev..."
 make dev || abort "Dev image build failed."
-ok "cluar5-dev built"
+ok "${PROJECT_NAME}-dev built"
 
 # ── Tests ─────────────────────────────────────────────────────────────────────
 echo ""

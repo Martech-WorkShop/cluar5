@@ -2,8 +2,9 @@
 # templateInit.sh — First-run template initialization script.
 #
 # Fired automatically by .devcontainer/devcontainer.json onCreateCommand.
-# Detects whether this is a fresh template clone and, if so, prompts for
-# project details then renames all references throughout the repo.
+# Detects whether this is a fresh template clone and, if so, auto-detects
+# project details from the git remote and renames all references throughout
+# the repo.
 #
 # Safe to run multiple times — exits immediately if already initialized.
 
@@ -19,31 +20,26 @@ if ! grep -q "GITHUB_USER=${TEMPLATE_USER}" PROJECT.conf 2>/dev/null; then
     exit 0
 fi
 
-# ── Prompt ───────────────────────────────────────────────────────────────────
+# ── Auto-detect from git remote ──────────────────────────────────────────────
+REMOTE_URL=$(git remote get-url origin 2>/dev/null || true)
+
+if [ -z "$REMOTE_URL" ]; then
+    echo "Error: no git remote 'origin' found. Cannot auto-detect project details."
+    exit 1
+fi
+
+PROJECT_NAME=$(basename "$REMOTE_URL" .git)
+GITHUB_USER=$(echo "$REMOTE_URL" | sed 's|.*[:/]\([^/]*\)/[^/]*\.git|\1|')
+
 echo ""
 echo "╔══════════════════════════════════════════════╗"
 echo "║       cluar5 — First Run Setup               ║"
 echo "╚══════════════════════════════════════════════╝"
 echo ""
-echo "This is a fresh clone of the cluar5 template."
-echo "Enter your project details to initialize the repo."
+echo "Detected from git remote:"
+echo "  Project : ${PROJECT_NAME}"
+echo "  User    : ${GITHUB_USER}"
 echo ""
-
-read -rp "Project name (e.g. my-app):        " PROJECT_NAME
-read -rp "GitHub username or org (e.g. acme): " GITHUB_USER
-echo ""
-
-# ── Validate ─────────────────────────────────────────────────────────────────
-if [ -z "$PROJECT_NAME" ] || [ -z "$GITHUB_USER" ]; then
-    echo "Error: both fields are required. Run this script again to retry."
-    exit 1
-fi
-
-# Basic name validation — alphanumeric and hyphens only
-if ! echo "$PROJECT_NAME" | grep -qE '^[a-zA-Z0-9][a-zA-Z0-9-]*$'; then
-    echo "Error: project name must be alphanumeric (hyphens allowed, no spaces)."
-    exit 1
-fi
 
 REPO_URL="https://github.com/${GITHUB_USER}/${PROJECT_NAME}.git"
 
@@ -130,6 +126,8 @@ fi
 
 # ── Commit and push ───────────────────────────────────────────────────────────
 echo "Committing initialization..."
+git config user.name "${GITHUB_USER}"
+git config user.email "${GITHUB_USER}@users.noreply.github.com"
 git add -A
 git commit -m "chore: initialize project as ${PROJECT_NAME}"
 
