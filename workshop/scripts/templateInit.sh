@@ -41,11 +41,14 @@ echo "  Project : ${PROJECT_NAME}"
 echo "  User    : ${GITHUB_USER}"
 echo ""
 
-REPO_URL="https://github.com/${GITHUB_USER}/${PROJECT_NAME}.git"
+REPO_URL="git@github.com:${GITHUB_USER}/${PROJECT_NAME}.git"
 
 echo "Initializing: ${TEMPLATE_NAME} → ${PROJECT_NAME}"
 echo "Repository:   ${REPO_URL}"
 echo ""
+
+# ── Switch remote to SSH ─────────────────────────────────────────────────────
+git remote set-url origin "${REPO_URL}"
 
 # ── Update PROJECT.conf ───────────────────────────────────────────────────────
 sed -i \
