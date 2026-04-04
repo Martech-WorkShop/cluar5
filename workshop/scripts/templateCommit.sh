@@ -10,17 +10,32 @@ set -e
 
 source PROJECT.conf
 
-# Nothing to commit if working tree is clean
-if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+NEEDS_COMMIT=false
+NEEDS_PUSH=false
+
+# Check for uncommitted changes
+if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    NEEDS_COMMIT=true
+fi
+
+# Check for unpushed commits
+if [ -n "$(git log --oneline @{u}..HEAD 2>/dev/null)" ]; then
+    NEEDS_PUSH=true
+fi
+
+if [ "$NEEDS_COMMIT" = "false" ] && [ "$NEEDS_PUSH" = "false" ]; then
     exit 0
 fi
 
 echo ""
-echo "Committing initialization changes..."
 git config user.name "${GITHUB_USER}"
 git config user.email "${GITHUB_USER}@users.noreply.github.com"
-git add -A
-git commit -m "chore: initialize project as ${PROJECT_NAME}"
+
+if [ "$NEEDS_COMMIT" = "true" ]; then
+    echo "Committing initialization changes..."
+    git add -A
+    git commit -m "chore: initialize project as ${PROJECT_NAME}"
+fi
 
 if git push; then
     echo "Pushed to GitHub."
