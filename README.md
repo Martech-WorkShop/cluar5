@@ -95,7 +95,7 @@ Directory structure:
 ├── .devcontainer/        ← VS Code Dev Containers configuration
 ├── workshop/
 │   ├── docker/           ← All five Dockerfiles + docker-compose stub
-│   ├── scripts/          ← rename.sh, check-versions.sh, update-versions.sh
+│   ├── scripts/          ← templateInit.sh, check-versions.sh, update-versions.sh
 │   ├── health/           ← Health check contract and reference implementation
 │   └── docs/             ← DEV-WORKFLOW.md, TEMPLATE-USAGE.md, CONTRIBUTING.md
 ├── PROJECT.conf          ← Project name and repository URL

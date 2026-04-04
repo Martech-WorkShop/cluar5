@@ -19,14 +19,24 @@ cluar5 is a starting point for LLM-native projects. Fork it, initialize it with 
 3. Paste the URL you just copied and press Enter
 4. Wait for the container to build (first time takes a few minutes)
 
-On first launch the container runs `workshop/scripts/rename.sh` automatically. It will prompt:
+On first launch the container runs `workshop/scripts/templateInit.sh` automatically. It will prompt:
 
 ```
 Project name (e.g. my-app):         your-project
 GitHub username or org (e.g. acme): your-github-user
 ```
 
-It renames all references throughout the repo, commits, and pushes. Your project is initialized.
+It renames all references throughout the repo, asks whether you want a local volume for your code, commits, and pushes. Your project is initialized.
+
+### Storage: container-only vs local volume
+
+The first time you open the template in a VS Code Dev Container, you will be asked whether you want to enable a local volume.
+
+Because cluar5 requires several environments, we like to enclose it completely in a container. This keeps your system clean and secure. When you are done working, it all goes away with the container. This means no local copy of any files, which live inside the container ONLY. If you stop the container, the files are there for you next time. If you remove the container, the files are gone forever. Because we use a Github-heavy process, even if you lost the container, your files should be in GitHub, provided you commit after every session. All that said, this is a purist way of thinking and might not be practical for every user, hence we can now enable the use of a local volume instead, providing you a local copy that can be restored even if the container was eliminated. This means triple redundancy: GitHub, container, local.
+
+- **Stop the container** → files are still there next time
+- **Remove the container** → files are gone forever
+- Commit frequently, commit after every session.
 
 ---
 
@@ -71,7 +81,7 @@ When logic becomes dense enough that reading it requires effort, move it to `r5/
 | `workshop/health/` | Health check contract |
 | `Makefile` | Build automation — extend, don't replace |
 | `.devcontainer/devcontainer.json` | VS Code integration |
-| `PROJECT.conf`, `VERSIONS` | Already updated by rename.sh |
+| `PROJECT.conf`, `VERSIONS` | Already updated by templateInit.sh |
 
 ### Replace with your application
 
@@ -94,7 +104,7 @@ When logic becomes dense enough that reading it requires effort, move it to `r5/
 ├── .devcontainer/        ← VS Code Dev Containers configuration
 ├── workshop/
 │   ├── docker/           ← All Dockerfiles + docker-compose stub
-│   ├── scripts/          ← rename.sh, check-versions.sh, update-versions.sh
+│   ├── scripts/          ← templateInit.sh, check-versions.sh, update-versions.sh
 │   ├── health/           ← Health check contract and reference implementation
 │   └── docs/             ← This documentation
 ├── build/                ← Generated output (gitignored)

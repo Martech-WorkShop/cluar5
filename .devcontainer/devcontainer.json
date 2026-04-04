@@ -12,7 +12,7 @@
 
     // Runs once on first container creation — detects a fresh template clone
     // and runs the rename wizard if needed.
-    "onCreateCommand": "bash workshop/scripts/rename.sh",
+    "onCreateCommand": "bash workshop/scripts/templateInit.sh",
 
     // Keep the container running when the VS Code window closes — preserves
     // live Gambit REPL state so you can reconnect without losing your session.
