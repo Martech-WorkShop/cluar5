@@ -32,11 +32,13 @@ It renames all references throughout the repo, asks whether you want a local vol
 
 The first time you open the template in a VS Code Dev Container, you will be asked whether you want to enable a local volume.
 
-Because cluar5 requires several environments, we like to enclose it completely in a container. This keeps your system clean and secure. When you are done working, it all goes away with the container. This means no local copy of any files, which live inside the container ONLY. If you stop the container, the files are there for you next time. If you remove the container, the files are gone forever. Because we use a Github-heavy process, even if you lost the container, your files should be in GitHub, provided you commit after every session. All that said, this is a purist way of thinking and might not be practical for every user, hence we can now enable the use of a local volume instead, providing you a local copy that can be restored even if the container was eliminated. This means triple redundancy: GitHub, container, local.
+Because cluar5 requires several environments, we like to enclose it completely in a container. This keeps your system clean and secure. When you are done working, it all goes away with the container. This means no local copy of any files, which live inside the container ONLY. If you stop the container, the files are there for you next time. If you remove the container, the files are gone forever. Because we use a Github-heavy process, even if you lost the container, your files should be in GitHub, provided you commit after every session.
 
 - **Stop the container** → files are still there next time
 - **Remove the container** → files are gone forever
 - Commit frequently, commit after every session.
+
+All that said, this is a purist way of thinking and might not be practical for every user, hence we can now enable the use of a local volume instead, providing you a local copy that can be restored even if the container was eliminated. This means triple redundancy: GitHub, container, local.
 
 ---
 
